@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mississippi Legal Service, PLLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Courier+Prime:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* =============================================
+       CSS VARIABLES - Brand Colors
+    ============================================= */
+    :root {
+      --mauve:       #9e6b7b;
+      --mauve-light: #c49aab;
+      --mauve-pale:  #f3e8ec;
+      --navy:        #2c3e5c;
+      --navy-light:  #3d5278;
+      --gold:        #c9a84c;
+      --gold-light:  #e2c97e;
+      --gold-pale:   #f8f2e4;
+      --cream:       #faf7f2;
+      --cream-dark:  #f0ebe0;
+      --text-dark:   #2a2520;
+      --text-mid:    #5a4f47;
+      --text-light:  #8b7d73;
+      --white:       #ffffff;
+      --shadow-soft: 0 4px 24px rgba(44,62,92,0.10);
+      --shadow-card: 0 8px 40px rgba(44,62,92,0.13);
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text-dark);
+      font-family: 'Lato', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* =============================================
+       TYPOGRAPHY HELPERS
+    ============================================= */
+    .script {
+      font-family: 'Great Vibes', cursive;
+      color: var(--mauve);
+    }
+    .serif { font-family: 'Playfair Display', serif; }
+    .mono  { font-family: 'Courier Prime', monospace; }
+    .cormorant { font-family: 'Cormorant Garamond', serif; }
+
+    /* =============================================
+       SECTION UTILITY
+    ============================================= */
+    section { position: relative; overflow: hidden; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .section-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      justify-content: center;
+      margin: 28px 0;
+      color: var(--gold);
+    }
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+      max-width: 200px;
+    }
+    .ornament-center {
+      width: 8px; height: 8px;
+      border: 1.5px solid var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       NAVIGATION
+    ============================================= */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(250, 247, 242, 0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+      transition: box-shadow 0.3s;
+    }
+    #navbar.scrolled {
+      box-shadow: 0 2px 20px rgba(44,62,92,0.10);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img {
+      height: 48px;
+      width: auto;
+    }
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+    .nav-logo-script {
+      font-family: 'Great Vibes', cursive;
+      font-size: 22px;
+      color: var(--navy);
+    }
+    .nav-logo-sub {
+      font-family: 'Courier Prime', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--navy);
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .nav-links a:hover { color: var(--mauve); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      background: var(--navy);
+      color: var(--white) !important;
+      padding: 10px 22px;
+      border-radius: 2px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--mauve) !important; color: var(--white) !important; }
+    .nav-cta::after { display: none !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-hamburger span {
+      width: 24px; height: 2px;
+      background: var(--navy);
+      transition: all 0.3s;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 72px;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(158,107,123,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 60%, rgba(44,62,92,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 100% at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 50%),
+        var(--cream);
+    }
+    /* Watercolor texture overlay */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 80px 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-content { position: relative; }
+
+    .hero-eyebrow {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.30em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 28px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-headline {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(52px, 6vw, 80px);
+      color: var(--navy);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .hero-sub-heading {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-sub-heading span:first-child,
+    .hero-sub-heading span:last-child {
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--gold-light);
+    }
+
+    .hero-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--text-mid);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: 2px;
+      transition: background 0.25s, transform 0.2s;
+      border: 1px solid var(--navy);
+    }
+    .btn-primary:hover {
+      background: var(--mauve);
+      border-color: var(--mauve);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--navy);
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: 2px;
+      border: 1px solid var(--navy);
+      transition: all 0.25s;
+    }
+    .btn-outline:hover {
+      background: var(--navy);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-logo-large {
+      width: 100%;
+      max-width: 420px;
+      filter: drop-shadow(0 12px 40px rgba(44,62,92,0.15));
+      animation: floatLogo 6s ease-in-out infinite;
+    }
+    @keyframes floatLogo {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      background: var(--white);
+      border: 1px solid var(--gold-light);
+      padding: 16px 20px;
+      border-radius: 3px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      min-width: 130px;
+    }
+    .hero-badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .hero-badge-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    /* =============================================
+       INTRO BANNER
+    ============================================= */
+    #intro-banner {
+      background: var(--navy);
+      padding: 28px 0;
+    }
+    .intro-banner-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .intro-banner-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--white);
+    }
+    .intro-banner-icon {
+      width: 36px; height: 36px;
+      background: rgba(201,168,76,0.2);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .intro-banner-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+    }
+    .intro-banner-divider {
+      width: 1px; height: 32px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* =============================================
+       ABOUT / WHAT IS A LEGAL LIAISON
+    ============================================= */
+    #about {
+      padding: 100px 0;
+      background: var(--white);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-image-stack {
+      position: relative;
+      height: 480px;
+    }
+    .about-card-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 85%;
+      height: 100%;
+      background: var(--cream-dark);
+      border-radius: 3px;
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+    .about-card-main img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .about-accent-card {
+      position: absolute;
+      bottom: -20px; right: -20px;
+      width: 55%;
+      background: var(--mauve-pale);
+      border: 1px solid rgba(158,107,123,0.2);
+      border-radius: 3px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .accent-card-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .accent-card-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .accent-card-sub {
+      font-size: 12px;
+      color: var(--text-light);
+    }
+
+    .about-content {}
+    .about-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 3.5vw, 44px);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .about-content h2 em {
+      font-style: italic;
+      color: var(--mauve);
+    }
+
+    .definition-box {
+      background: var(--cream);
+      border-left: 3px solid var(--gold);
+      padding: 24px 28px;
+      margin: 32px 0;
+      border-radius: 0 3px 3px 0;
+    }
+    .definition-word {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .definition-pronunciation {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    .definition-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .about-body {
+      font-size: 15px;
+      color: var(--text-light);
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+
+    .about-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 20px 24px;
+      background: var(--gold-pale);
+      border-radius: 3px;
+    }
+    .about-note-icon {
+      color: var(--gold);
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .about-note-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       SERVICES
+    ============================================= */
+    #services {
+      padding: 100px 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 90% 20%, rgba(158,107,123,0.10) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 60% at 10% 80%, rgba(44,62,92,0.07) 0%, transparent 60%),
+        var(--cream);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 3.5vw, 42px);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .section-header h2 em {
+      font-style: italic;
+      color: var(--mauve);
+    }
+    .section-header p {
+      font-size: 15px;
+      color: var(--text-light);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--white);
+      border: 1px solid rgba(201,168,76,0.20);
+      border-radius: 3px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(to right, var(--mauve), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card);
+      border-color: rgba(201,168,76,0.40);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      width: 56px; height: 56px;
+      background: var(--mauve-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 24px;
+      transition: background 0.3s;
+    }
+    .service-card:hover .service-icon {
+      background: var(--gold-pale);
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       TEAM
+    ============================================= */
+    #team {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+    }
+
+    /* File folder card design matching brand */
+    .team-card {
+      position: relative;
+      cursor: default;
+      transition: transform 0.3s;
+    }
+    .team-card:hover { transform: translateY(-8px); }
+
+    .folder-tab {
+      background: #ede7d4;
+      height: 28px;
+      border-radius: 6px 14px 0 0;
+      width: 70%;
+      margin-left: 20px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+    }
+    .folder-tab-text {
+      font-family: 'Courier Prime', monospace;
+      font-size: 8.5px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+
+    .folder-body {
+      background: #f5f0e3;
+      border-radius: 0 3px 3px 3px;
+      padding: 24px 20px 28px;
+      box-shadow: 0 6px 24px rgba(44,62,92,0.12);
+      position: relative;
+    }
+    /* stacked folder pages behind */
+    .folder-body::before {
+      content: '';
+      position: absolute;
+      top: -6px; left: 6px; right: -6px;
+      height: 100%;
+      background: #ede7d4;
+      border-radius: 0 3px 3px 3px;
+      z-index: -1;
+    }
+    .folder-body::after {
+      content: '';
+      position: absolute;
+      top: -12px; left: 10px; right: -10px;
+      height: 100%;
+      background: #e7dfc9;
+      border-radius: 0 3px 3px 3px;
+      z-index: -2;
+    }
+
+    .polaroid-wrap {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .polaroid {
+      background: var(--white);
+      padding: 8px 8px 4px 8px;
+      box-shadow: 2px 4px 14px rgba(44,62,92,0.15);
+      transform: rotate(-2deg);
+      transition: transform 0.3s;
+      position: relative;
+    }
+    .team-card:hover .polaroid { transform: rotate(0deg); }
+
+    /* paperclip SVG */
+    .polaroid-clip {
+      position: absolute;
+      top: -14px;
+      right: 30px;
+      z-index: 10;
+    }
+
+    .polaroid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      min-height: 180px;
+      background: var(--mauve-pale);
+    }
+
+    .team-name {
+      font-family: 'Courier Prime', monospace;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--mauve);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .team-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      color: var(--navy);
+      letter-spacing: 0.05em;
+    }
+
+    .folder-logo {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 44px;
+      opacity: 0.85;
+    }
+
+    /* =============================================
+       WHY CHOOSE US / STATS
+    ============================================= */
+    #why {
+      padding: 100px 0;
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+    }
+    #why::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 0% 50%, rgba(158,107,123,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 60% at 100% 50%, rgba(201,168,76,0.12) 0%, transparent 60%);
+    }
+
+    .why-inner { position: relative; z-index: 1; }
+
+    .why-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .why-header .section-label { color: var(--gold-light); }
+    .why-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 40px);
+      color: var(--white);
+      line-height: 1.2;
+    }
+    .why-header h2 em {
+      font-style: italic;
+      color: var(--mauve-light);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .why-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 3px;
+      padding: 36px 32px;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .why-card:hover {
+      background: rgba(255,255,255,0.09);
+      border-color: rgba(201,168,76,0.35);
+    }
+    .why-card-icon {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .why-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .why-card p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.75;
+    }
+
+    .why-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+      margin: 60px 0;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .stat-item {}
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.50);
+    }
+
+    /* =============================================
+       TESTIMONIALS
+    ============================================= */
+    #testimonials {
+      padding: 100px 0;
+      background: var(--mauve-pale);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 3px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      border-bottom: 3px solid var(--mauve-light);
+    }
+    .testimonial-quote {
+      font-family: 'Great Vibes', cursive;
+      font-size: 64px;
+      color: var(--mauve-light);
+      line-height: 0.8;
+      margin-bottom: 12px;
+      opacity: 0.6;
+    }
+    .testimonial-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .testimonial-author {
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .testimonial-stars {
+      color: var(--gold);
+      font-size: 14px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    #contact {
+      padding: 100px 0;
+      background: var(--cream);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 3vw, 38px);
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .contact-info h2 em {
+      font-style: italic;
+      color: var(--mauve);
+    }
+    .contact-info p {
+      font-size: 15px;
+      color: var(--text-light);
+      margin-bottom: 36px;
+      line-height: 1.8;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+    .contact-detail:last-of-type { border-bottom: none; }
+    .contact-detail-icon {
+      width: 40px; height: 40px;
+      background: var(--navy);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .contact-detail-text {}
+    .contact-detail-label {
+      font-family: 'Courier Prime', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+    .contact-detail-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--navy);
+    }
+    .contact-detail-value a {
+      color: var(--navy);
+      transition: color 0.2s;
+    }
+    .contact-detail-value a:hover { color: var(--mauve); }
+
+    /* Contact Form */
+    .contact-form-wrap {
+      background: var(--white);
+      border: 1px solid rgba(201,168,76,0.20);
+      border-radius: 3px;
+      padding: 48px 40px;
+      box-shadow: var(--shadow-soft);
+    }
+    .contact-form-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-family: 'Courier Prime', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      background: var(--cream);
+      border: 1px solid var(--cream-dark);
+      border-radius: 2px;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--mauve-light);
+      background: var(--white);
+    }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      padding: 16px;
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Courier Prime', monospace;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .form-submit:hover { background: var(--mauve); }
+
+    .form-disclaimer {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: 14px;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    #footer {
+      background: var(--navy);
+      padding: 60px 0 0;
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand img {
+      height: 70px;
+      margin-bottom: 20px;
+      filter: brightness(10);
+      opacity: 0.85;
+    }
+    .footer-brand-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .footer-brand-sub {
+      font-family: 'Courier Prime', monospace;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.50);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .footer-social a {
+      width: 34px; height: 34px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-size: 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .footer-social a:hover {
+      background: var(--mauve);
+      border-color: var(--mauve);
+    }
+
+    .footer-col-title {
+      font-family: 'Courier Prime', monospace;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-links li a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .footer-links li a:hover { color: var(--white); }
+
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+    }
+    .footer-contact-item span:first-child {
+      color: var(--gold-light);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .footer-bottom {
+      padding: 22px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-legalish {
+      font-family: 'Great Vibes', cursive;
+      font-size: 18px;
+      color: var(--gold-light);
+      opacity: 0.7;
+    }
+    .footer-legalish span {
+      font-family: 'Lato', sans-serif;
+      font-style: normal;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* =============================================
+       MOBILE NAV MENU
+    ============================================= */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px; left: 0; right: 0;
+      background: var(--cream);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      z-index: 999;
+      padding: 24px 32px;
+      flex-direction: column;
+      gap: 18px;
+      box-shadow: 0 8px 24px rgba(44,62,92,0.12);
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Courier Prime', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--navy);
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    /* =============================================
+       SCROLL ANIMATIONS
+       Elements are visible by default; JS adds .js-ready to body
+       to enable animations (prevents invisible content if JS fails)
+    ============================================= */
+    .fade-up {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .js-ready .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    .js-ready .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .team-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-image-wrap { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-image-stack { display: none; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; gap: 24px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .intro-banner-divider { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-inner { padding: 60px 20px; }
+      .section-inner { padding: 0 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="images/logo.png" alt="Mississippi Legal Service Logo" onerror="this.style.display='none'" />
+        <div class="nav-logo-text">
+          <span class="nav-logo-script">Mississippi</span>
+          <span class="nav-logo-sub">Legal Service, PLLC</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#contact" class="nav-cta">Get Help Now</a></li>
+      </ul>
+      <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#team" onclick="toggleMenu()">Our Team</a>
+    <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+    <a href="#contact" onclick="toggleMenu()">Get Help Now</a>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-content fade-up">
+        <div class="hero-eyebrow">Mississippi Legal Service, PLLC</div>
+        <h1 class="hero-headline">Mississippi</h1>
+        <div class="hero-sub-heading">
+          <span></span>
+          Legal Service
+          <span></span>
+        </div>
+        <p class="hero-tagline">Clear guidance when life feels overwhelming.</p>
+        <p class="hero-desc">
+          Trusted and affordable legal support services designed for individuals
+          navigating legal matters independently — without the stress, confusion,
+          or ChatGPT spirals.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+          <a href="#about" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap fade-up" style="transition-delay:0.2s">
+        <img src="images/logo-large.png" alt="Mississippi Legal Service" class="hero-logo-large" onerror="this.style.opacity='0'" />
+        <div class="hero-badge">
+          <div class="hero-badge-num">4+</div>
+          <div class="hero-badge-text">Dedicated<br/>Liaisons</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INTRO BANNER ==================== -->
+  <div id="intro-banner">
+    <div class="intro-banner-inner">
+      <div class="intro-banner-item">
+        <div class="intro-banner-icon">⚖️</div>
+        <span class="intro-banner-text">Legal Liaison Services</span>
+      </div>
+      <div class="intro-banner-divider"></div>
+      <div class="intro-banner-item">
+        <div class="intro-banner-icon">📋</div>
+        <span class="intro-banner-text">Pro Se Assistance</span>
+      </div>
+      <div class="intro-banner-divider"></div>
+      <div class="intro-banner-item">
+        <div class="intro-banner-icon">📁</div>
+        <span class="intro-banner-text">Forms · Filings · Procedure</span>
+      </div>
+      <div class="intro-banner-divider"></div>
+      <div class="intro-banner-item">
+        <div class="intro-banner-icon">🎓</div>
+        <span class="intro-banner-text">Education</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ABOUT ==================== -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-image-stack fade-up">
+          <div class="about-card-main">
+            <img src="images/team-group.jpg" alt="Mississippi Legal Service Team" onerror="this.style.display='none'" />
+          </div>
+          <div class="about-accent-card">
+            <div class="accent-card-label">Serving</div>
+            <div class="accent-card-title">Gulf Coast</div>
+            <div class="accent-card-sub">Pascagoula · Gulfport · Ocean Springs & beyond</div>
+          </div>
+        </div>
+        <div class="about-content fade-up" style="transition-delay:0.15s">
+          <div class="section-label">What We Do</div>
+          <h2>We Are Your <em>Legal Liaison</em></h2>
+          <div class="ornament"><div class="ornament-center"></div></div>
+
+          <div class="definition-box">
+            <div class="definition-word">Legal Liaison</div>
+            <div class="definition-pronunciation">[ lee-guhl lee-AY-zahn ]</div>
+            <div class="definition-text">
+              (n.) A legal liaison helps individuals or organizations understand legal
+              processes, organize information, and communicate effectively with
+              attorneys, courts, or agencies — while not giving legal advice or
+              representing anyone in court.
+            </div>
+          </div>
+
+          <p class="about-body">
+            Mississippi Legal Service delivers trusted, affordable legal support for
+            individuals navigating legal matters on their own. Whether you're
+            overwhelmed by paperwork, confused by deadlines, or unsure of next steps —
+            our team is here to walk alongside you.
+          </p>
+
+          <div class="about-note">
+            <div class="about-note-icon">✦</div>
+            <div class="about-note-text">
+              We stop the ChatGPT spirals, the deadline panic, and the stress
+              from confusing forms — so you can move forward with confidence.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SERVICES ==================== -->
+  <section id="services">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div class="section-label">How We Help</div>
+        <h2>Our <em>Services</em></h2>
+        <div class="ornament"><div class="ornament-center"></div></div>
+        <p>Practical legal support tailored to individuals representing themselves through the legal process.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card fade-up">
+          <div class="service-icon">⚖️</div>
+          <h3>Legal Liaison Services</h3>
+          <p>We bridge the gap between you and the legal system — helping you understand processes, organize documents, and communicate clearly with courts and attorneys.</p>
+        </div>
+        <div class="service-card fade-up" style="transition-delay:0.1s">
+          <div class="service-icon">👤</div>
+          <h3>Pro Se Assistance</h3>
+          <p>Representing yourself in court? We'll help you prepare and understand what's expected at every step, so you walk in informed and confident.</p>
+        </div>
+        <div class="service-card fade-up" style="transition-delay:0.2s">
+          <div class="service-icon">📄</div>
+          <h3>Forms &amp; Filings</h3>
+          <p>Court forms can be confusing. We help you identify the right forms, understand the instructions, and know where and how to file them correctly.</p>
+        </div>
+        <div class="service-card fade-up" style="transition-delay:0.3s">
+          <div class="service-icon">🎓</div>
+          <h3>Legal Education</h3>
+          <p>Knowledge is power. We provide clear, plain-language explanations of legal terms, procedures, timelines, and court expectations — so nothing surprises you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TEAM ==================== -->
+  <section id="team">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div class="section-label">The People Behind the Process</div>
+        <h2>Meet Our <em>Legal Team</em></h2>
+        <div class="ornament"><div class="ornament-center"></div></div>
+        <p>Real people. Real experience. Ready to help you navigate what comes next.</p>
+      </div>
+      <div class="team-grid">
+
+        <!-- Erin -->
+        <div class="team-card fade-up">
+          <div class="folder-tab"><span class="folder-tab-text">Legal Liaison</span></div>
+          <div class="folder-body">
+            <div class="polaroid-wrap">
+              <!-- Paperclip SVG -->
+              <svg class="polaroid-clip" width="22" height="44" viewBox="0 0 22 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 2 C5 2 2 6 2 11 L2 36 C2 40 5 42 9 42 C13 42 16 40 16 36 L16 12 C16 9 14 8 12 8 C10 8 8 9 8 12 L8 34" stroke="#b0a088" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              </svg>
+              <div class="polaroid">
+                <img src="images/team-erin.jpg" alt="Erin - Owner & Paralegal" onerror="this.style.visibility='hidden'" />
+              </div>
+            </div>
+            <div class="team-name">ERIN</div>
+            <div class="team-title">Owner · Paralegal</div>
+            <img src="images/logo-sm.png" alt="" class="folder-logo" />
+          </div>
+        </div>
+
+        <!-- Brandi -->
+        <div class="team-card fade-up" style="transition-delay:0.1s">
+          <div class="folder-tab"><span class="folder-tab-text">Legal Liaison</span></div>
+          <div class="folder-body">
+            <div class="polaroid-wrap">
+              <svg class="polaroid-clip" width="22" height="44" viewBox="0 0 22 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 2 C5 2 2 6 2 11 L2 36 C2 40 5 42 9 42 C13 42 16 40 16 36 L16 12 C16 9 14 8 12 8 C10 8 8 9 8 12 L8 34" stroke="#b0a088" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              </svg>
+              <div class="polaroid">
+                <img src="images/team-brandi.jpg" alt="Brandi - Paralegal" onerror="this.style.visibility='hidden'" />
+              </div>
+            </div>
+            <div class="team-name">BRANDI</div>
+            <div class="team-title">Paralegal</div>
+            <img src="images/logo-sm.png" alt="" class="folder-logo" />
+          </div>
+        </div>
+
+        <!-- Ashlee -->
+        <div class="team-card fade-up" style="transition-delay:0.2s">
+          <div class="folder-tab"><span class="folder-tab-text">Legal Liaison</span></div>
+          <div class="folder-body">
+            <div class="polaroid-wrap">
+              <svg class="polaroid-clip" width="22" height="44" viewBox="0 0 22 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 2 C5 2 2 6 2 11 L2 36 C2 40 5 42 9 42 C13 42 16 40 16 36 L16 12 C16 9 14 8 12 8 C10 8 8 9 8 12 L8 34" stroke="#b0a088" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              </svg>
+              <div class="polaroid">
+                <img src="images/team-ashlee.jpg" alt="Ashlee - Legal Assistant" onerror="this.style.visibility='hidden'" />
+              </div>
+            </div>
+            <div class="team-name">ASHLEE</div>
+            <div class="team-title">Legal Assistant</div>
+            <img src="images/logo-sm.png" alt="" class="folder-logo" />
+          </div>
+        </div>
+
+        <!-- Megan -->
+        <div class="team-card fade-up" style="transition-delay:0.3s">
+          <div class="folder-tab"><span class="folder-tab-text">Legal Liaison</span></div>
+          <div class="folder-body">
+            <div class="polaroid-wrap">
+              <svg class="polaroid-clip" width="22" height="44" viewBox="0 0 22 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 2 C5 2 2 6 2 11 L2 36 C2 40 5 42 9 42 C13 42 16 40 16 36 L16 12 C16 9 14 8 12 8 C10 8 8 9 8 12 L8 34" stroke="#b0a088" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              </svg>
+              <div class="polaroid">
+                <img src="images/team-megan.jpg" alt="Megan - Legal Assistant" onerror="this.style.visibility='hidden'" />
+              </div>
+            </div>
+            <div class="team-name">MEGAN</div>
+            <div class="team-title">Legal Assistant</div>
+            <img src="images/logo-sm.png" alt="" class="folder-logo" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WHY US ==================== -->
+  <section id="why">
+    <div class="section-inner why-inner">
+      <div class="why-header fade-up">
+        <div class="section-label">Why Choose Us</div>
+        <h2>Legal Support Without the <em>Overwhelm</em></h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card fade-up">
+          <div class="why-card-icon">💡</div>
+          <h3>No Confusion, Just Clarity</h3>
+          <p>We translate complex legal language and procedures into plain English so you always know where you stand and what comes next.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay:0.1s">
+          <div class="why-card-icon">💼</div>
+          <h3>Experienced &amp; Professional</h3>
+          <p>Our team of paralegals and legal assistants brings real-world experience to every case, providing practical guidance you can trust.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay:0.2s">
+          <div class="why-card-icon">💰</div>
+          <h3>Affordable Access</h3>
+          <p>Quality legal support shouldn't break the bank. We offer affordable services so more people can access the help they deserve.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay:0.05s">
+          <div class="why-card-icon">📍</div>
+          <h3>Locally Rooted</h3>
+          <p>Based on the Gulf Coast, we understand Mississippi courts, local procedures, and the communities we serve — Pascagoula, Gulfport, Ocean Springs &amp; beyond.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay:0.15s">
+          <div class="why-card-icon">🤝</div>
+          <h3>People-First Approach</h3>
+          <p>We meet you where you are — no judgment, no jargon. Just real support from real people who genuinely care about your outcome.</p>
+        </div>
+        <div class="why-card fade-up" style="transition-delay:0.25s">
+          <div class="why-card-icon">⏱️</div>
+          <h3>Deadline Driven</h3>
+          <p>Courts don't wait, and neither do we. We help you stay on top of filing deadlines, response windows, and critical dates so nothing falls through the cracks.</p>
+        </div>
+      </div>
+
+      <div class="why-divider"></div>
+
+      <div class="stats-row">
+        <div class="stat-item fade-up">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Dedicated Team Members</div>
+        </div>
+        <div class="stat-item fade-up" style="transition-delay:0.1s">
+          <div class="stat-num">5+</div>
+          <div class="stat-label">Locations Served</div>
+        </div>
+        <div class="stat-item fade-up" style="transition-delay:0.2s">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Client Focused</div>
+        </div>
+        <div class="stat-item fade-up" style="transition-delay:0.3s">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Forms Untangled</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section id="testimonials">
+    <div class="section-inner">
+      <div class="section-header fade-up">
+        <div class="section-label">Client Experiences</div>
+        <h2>What Our <em>Clients</em> Say</h2>
+        <div class="ornament"><div class="ornament-center"></div></div>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            I had no idea where to start with my custody paperwork. The team walked me
+            through every form and every deadline. I never felt lost. Truly life-changing support.
+          </p>
+          <div class="testimonial-author">— Ocean Springs Client</div>
+        </div>
+        <div class="testimonial-card fade-up" style="transition-delay:0.12s">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            I was drowning in Google searches and contradicting advice. Mississippi Legal Service
+            cut through all of it and gave me a clear, calm path forward. Worth every penny.
+          </p>
+          <div class="testimonial-author">— Gulfport Client</div>
+        </div>
+        <div class="testimonial-card fade-up" style="transition-delay:0.24s">
+          <div class="testimonial-quote">"</div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            Professional, knowledgeable, and incredibly kind. They treated me like a person,
+            not a case number. I finally feel confident navigating my own legal situation.
+          </p>
+          <div class="testimonial-author">— Pascagoula Client</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="contact-grid">
+        <div class="contact-info fade-up">
+          <div class="section-label">Reach Out</div>
+          <h2>Let's Talk About Your <em>Situation</em></h2>
+          <div class="ornament" style="justify-content:flex-start; margin-left:0;">
+            <div class="ornament-center"></div>
+            <div style="flex:none; width:80px; height:1px; background:linear-gradient(to right, var(--gold-light), transparent);"></div>
+          </div>
+          <p>
+            Not sure where to start? That's okay — that's exactly what we're here for.
+            Reach out and we'll help you figure out the next right step.
+          </p>
+
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📞</div>
+            <div class="contact-detail-text">
+              <div class="contact-detail-label">Phone</div>
+              <div class="contact-detail-value">
+                <a href="tel:2289183833">(228) 918-3833</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">✉️</div>
+            <div class="contact-detail-text">
+              <div class="contact-detail-label">Email</div>
+              <div class="contact-detail-value">
+                <a href="mailto:info@mslegalservice.com">info@mslegalservice.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div class="contact-detail-text">
+              <div class="contact-detail-label">Location</div>
+              <div class="contact-detail-value">Ocean Springs, MS</div>
+            </div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🌐</div>
+            <div class="contact-detail-text">
+              <div class="contact-detail-label">Website</div>
+              <div class="contact-detail-value">
+                <a href="https://www.mslegalservice.com" target="_blank">www.mslegalservice.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap fade-up" style="transition-delay:0.15s">
+          <div class="contact-form-title">Send Us a Message</div>
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="first_name" placeholder="Jane" required />
+              </div>
+              <div class="form-group">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="last_name" placeholder="Smith" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="(228) 000-0000" />
+            </div>
+            <div class="form-group">
+              <label for="matter">Type of Legal Matter</label>
+              <select id="matter" name="matter">
+                <option value="">Select one...</option>
+                <option>Family Law</option>
+                <option>Civil Court</option>
+                <option>Small Claims</option>
+                <option>Landlord/Tenant</option>
+                <option>Document Preparation</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Tell Us a Little About Your Situation</label>
+              <textarea id="message" name="message" placeholder="Brief description of what you need help with..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Send Message →</button>
+          </form>
+          <p class="form-disclaimer">
+            Note: Mississippi Legal Service is not a law firm and does not provide legal advice
+            or representation. We provide legal support and document assistance services only.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer id="footer">
+    <div class="section-inner">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <img src="images/logo.png" alt="Mississippi Legal Service" onerror="this.style.display='none'" />
+          <div class="footer-brand-name">Mississippi</div>
+          <div class="footer-brand-sub">Legal Service, PLLC</div>
+          <p>Trusted and affordable legal support for individuals navigating legal matters independently across the Mississippi Gulf Coast.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/mslegalservice" target="_blank" title="Facebook">f</a>
+            <a href="https://www.instagram.com" target="_blank" title="Instagram">&#9825;</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Quick Links</div>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#team">Our Team</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="#services">Legal Liaison</a></li>
+            <li><a href="#services">Pro Se Assistance</a></li>
+            <li><a href="#services">Forms &amp; Filings</a></li>
+            <li><a href="#services">Legal Education</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <div class="footer-contact-item">
+            <span>📞</span>
+            <span><a href="tel:2289183833" style="color:inherit">(228) 918-3833</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span>✉️</span>
+            <span><a href="mailto:info@mslegalservice.com" style="color:inherit">info@mslegalservice.com</a></span>
+          </div>
+          <div class="footer-contact-item">
+            <span>📍</span>
+            <span>Ocean Springs, MS</span>
+          </div>
+          <div class="footer-contact-item">
+            <span>🌐</span>
+            <span><a href="https://www.mslegalservice.com" target="_blank" style="color:inherit">mslegalservice.com</a></span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 Mississippi Legal Service, PLLC. All rights reserved.
+          Mississippi Legal Service is not a law firm and does not provide legal advice.
+        </div>
+        <div class="footer-legalish">
+          Legal<span style="color:var(--gold-light)">•</span>ish
+          <span>· a subsidiary of MLS</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // Mark body as JS-ready to enable scroll animations
+    // (content stays visible if JS fails or animations don't fire)
+    document.documentElement.classList.add('js-ready');
+    document.body.classList.add('js-ready');
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    // Scroll animations
+    const observerOptions = { threshold: 0.05, rootMargin: '0px 0px -30px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Safety fallback: if any fade-up elements are still hidden after 1.5s, reveal them
+    setTimeout(() => {
+      document.querySelectorAll('.fade-up:not(.visible)').forEach(el => {
+        el.classList.add('visible');
+      });
+    }, 1500);
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          const offset = 80;
+          window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
