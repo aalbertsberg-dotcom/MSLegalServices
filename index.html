@@ -123,7 +123,7 @@
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 32px;
-      height: 76px;
+      height: 90px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -134,8 +134,8 @@
       gap: 10px;
     }
     .nav-logo img {
-      height: 60px;
-      width: 60px;
+      height: 74px;
+      width: 74px;
       object-fit: contain;
       object-position: center;
     }
@@ -146,12 +146,12 @@
     }
     .nav-logo-script {
       font-family: 'Great Vibes', cursive;
-      font-size: 22px;
+      font-size: 27px;
       color: var(--navy);
     }
     .nav-logo-sub {
       font-family: 'Courier Prime', monospace;
-      font-size: 8.5px;
+      font-size: 10px;
       letter-spacing: 0.25em;
       color: var(--gold);
       text-transform: uppercase;
@@ -228,7 +228,7 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding-top: 72px;
+      padding-top: 90px;
       background:
         radial-gradient(ellipse 80% 60% at 20% 40%, rgba(158,107,123,0.18) 0%, transparent 60%),
         radial-gradient(ellipse 60% 80% at 80% 60%, rgba(44,62,92,0.10) 0%, transparent 60%),
@@ -248,7 +248,7 @@
     .hero-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 80px 32px;
+      padding: 48px 32px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 64px;
@@ -368,7 +368,7 @@
     }
     .hero-logo-large {
       width: 100%;
-      max-width: 400px;
+      max-width: 480px;
       filter: drop-shadow(0 8px 32px rgba(44,62,92,0.18));
       animation: floatLogo 6s ease-in-out infinite;
     }
@@ -1201,6 +1201,34 @@
       .services-grid { grid-template-columns: 1fr; }
       .team-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
     }
+    /* =============================================
+       DOUBLE-A SOLUTIONS CREDIT BAR
+    ============================================= */
+    #daa-credit {
+      background: #0c1e47;
+      padding: 10px 32px;
+      text-align: center;
+    }
+    #daa-credit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Courier Prime', monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    #daa-credit-link:hover { color: #06b6d4; }
+    #daa-credit-link strong { color: rgba(255,255,255,0.85); font-weight: 700; }
+    #daa-logo {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
   </style>
 </head>
 <body>
@@ -1677,6 +1705,27 @@
     </div>
   </footer>
 
+  <!-- ==================== BUILT BY CREDIT ==================== -->
+  <div id="daa-credit">
+    <a href="https://aalbertsberg.us" target="_blank" rel="noopener" id="daa-credit-link">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" id="daa-logo" aria-hidden="true">
+        <defs>
+          <linearGradient id="daaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0c1e47;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d="M 100 20 L 170 60 L 170 140 L 100 180 L 30 140 L 30 60 Z" fill="url(#daaGrad)" stroke="#06b6d4" stroke-width="3" />
+        <path d="M 100 35 L 155 65 L 155 135 L 100 165 L 45 135 L 45 65 Z" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.3" />
+        <text x="100" y="120" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="#06b6d4" text-anchor="middle">AA</text>
+        <circle cx="100" cy="20" r="4" fill="#06b6d4" />
+        <circle cx="170" cy="60" r="4" fill="#06b6d4" />
+        <circle cx="170" cy="140" r="4" fill="#06b6d4" />
+      </svg>
+      <span>Built by <strong>Double-A Solutions</strong></span>
+    </a>
+  </div>
+
   <!-- ==================== JAVASCRIPT ==================== -->
   <script>
     // Mark body as JS-ready for scroll animations
@@ -1742,7 +1791,7 @@
         var target = document.querySelector(this.getAttribute('href'));
         if (target) {
           e.preventDefault();
-          window.scrollTo({ top: target.offsetTop - 72, behavior: 'smooth' });
+          window.scrollTo({ top: target.offsetTop - 90, behavior: 'smooth' });
         }
       });
     });
